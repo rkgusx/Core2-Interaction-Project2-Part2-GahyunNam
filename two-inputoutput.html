@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2 INPUT 1 OUTPUT TEMPLATE</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        #resultText {
+            font-size: 1.5rem;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <input type="text" id="charInput1" maxlength="1" placeholder="Enter 1st Letter" oninput="validateInput(this)">
+    <input type="text" id="charInput2" maxlength="1" placeholder="Enter 2nd Letter" oninput="validateInput(this)">
+    
+    <button onclick="displaySum()">Show Sum</button>
+
+    <div id="resultText"></div>
+
+    <script>
+        function validateInput(input) {
+            const value = input.value.toUpperCase();
+            if (!/^[A-Z]$/.test(value)) {
+                input.value = '';  // 숫자나 알파벳 이외의 값은 지움
+            }
+        }
+
+        function displaySum() {
+            const input1_letter = document.getElementById("charInput1").value.toUpperCase();
+            const input2_letter = document.getElementById("charInput2").value.toUpperCase();
+
+            const input1_value = input1_letter.charCodeAt(0) - 64;
+            const input2_value = input2_letter.charCodeAt(0) - 64;
+
+            const sum = input1_value + input2_value;
+
+            const resultText = document.getElementById("resultText");
+            resultText.innerText = `The sum of ${input1_letter} and ${input2_letter} is: ${sum}`;
+        }
+    </script>
+
+</body>
+</html>
