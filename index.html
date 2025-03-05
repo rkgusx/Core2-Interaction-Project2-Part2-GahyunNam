@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2 INPUT 1 OUTPUT TEMPLATE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Kanit', sans-serif;
+            text-align: center;
+            margin-top: 50px;
+            background: linear-gradient(to right, #a8c0ff, #d1d1ff);
+            color: #4a4e69;
+        }
+        #container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            margin-top: 20px;
+        }
+        input {
+            padding: 10px;
+            margin: 10px;
+            border: 2px solid #a8c0ff;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 1rem;
+            font-family: 'Kanit', sans-serif;
+        }
+        input::placeholder {
+            color: #b0b3c6;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #a8c0ff;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            color: white;
+            font-family: 'Kanit', sans-serif;
+        }
+        button:hover {
+            background-color: #8d9cd7;
+        }
+        #resultText {
+            font-size: 1.2rem;
+            margin-top: 20px;
+            color: #6c757d;
+            font-family: 'Kanit', sans-serif;
+        }
+        #hintText {
+            font-size: 1rem;
+            color: #6c757d;
+            margin-top: 10px;
+            font-family: 'Kanit', sans-serif;
+        }
+        .bold-number {
+            font-weight: bold;
+            color:#7a89c2;
+        }
+        #alphabetChart {
+            margin-top: 40px;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            display: block;
+            width: 100%;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        #alphabetChart h2 {
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+            color: #4a4e69;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            font-size: 1rem;
+            color: #6c757d;
+        }
+        td {
+            padding: 8px 15px;
+            text-align: center;
+        }
+        .error-text {
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <h1>Letter to Number Converter</h1>
+    <p id="hintText">Enter a letter from A-Z to see its numeric value.</p>
+    <div id="container">
+        <input type="text" id="charInput1" maxlength="1" placeholder="Enter 1st Letter" oninput="validateInput(this)" onkeydown="checkEnter(event)">
+        <input type="text" id="charInput2" maxlength="1" placeholder="Enter 2nd Letter" oninput="validateInput(this)" onkeydown="checkEnter(event)">
+        
+        <button onclick="displaySum()">Show Sum</button>
+        <div id="resultText"></div>
+    </div>
+    <div id="alphabetChart">
+        <h2>Alphabet to Number Chart</h2>
+        <table>
+            <tr>
+                <td>A = 1</td> <td>B = 2</td> <td>C = 3</td> <td>D = 4</td> <td>E = 5</td>
+            </tr>
+            <tr>
+                <td>F = 6</td> <td>G = 7</td> <td>H = 8</td> <td>I = 9</td> <td>J = 10</td>
+            </tr>
+            <tr>
+                <td>K = 11</td> <td>L = 12</td> <td>M = 13</td> <td>N = 14</td> <td>O = 15</td>
+            </tr>
+            <tr>
+                <td>P = 16</td> <td>Q = 17</td> <td>R = 18</td> <td>S = 19</td> <td>T = 20</td>
+            </tr>
+            <tr>
+                <td>U = 21</td> <td>V = 22</td> <td>W = 23</td> <td>X = 24</td> <td>Y = 25</td>
+            </tr>
+            <tr>
+                <td>Z = 26</td>
+            </tr>
+        </table>
+    </div>
+    <script>
+        function validateInput(input) {
+            const value = input.value.toUpperCase();
+            if (!/^[A-Z]$/.test(value)) {
+                input.value = '';
+            }
+        }
+        
+        function checkEnter(event) {
+            if (event.key === "Enter") {
+                displaySum();
+            }
+        }
+
+        function displaySum() {
+            const input1_letter = document.getElementById("charInput1").value.toUpperCase();
+            const input2_letter = document.getElementById("charInput2").value.toUpperCase();
+
+            const resultText = document.getElementById("resultText");
+
+            if (!input1_letter || !input2_letter) {
+                resultText.innerHTML = "<span class='error-text'>Please enter both letters.</span>";
+                return;
+            }
+
+            const input1_value = input1_letter.charCodeAt(0) - 64;
+            const input2_value = input2_letter.charCodeAt(0) - 64;
+
+            const sum = input1_value + input2_value;
+
+            resultText.innerHTML = `<span style="color:#4a4e69">${input1_letter}</span> + <span style="color:#4a4e69">${input2_letter}</span> = <strong class="bold-number" style="color:#7a89c2">${sum}</strong>`;
+        }
+    </script>
+</body>
+</html>
